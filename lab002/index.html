@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lab002</title>
+</head>
+<body>
+
+<div id="app-1">
+    <span>{{message}}</span>
+</div>
+
+<hr>
+<div id="app-2">
+    <span v-once>{{message}}</span>
+</div>
+
+<script src="../assets/js/vue@2.4.2.js"></script>
+<script>
+    //插值
+    var app1 = new Vue({
+        el: "#app-1",
+        data: {
+            message: "message1"
+        }
+    })
+
+    //v-once，后台数据会变动，但是页面上显示的数据不会变动
+    var app2 = new Vue({
+        el: "#app-2",
+        data: {
+            message: "message2"
+        }
+    })
+</script>
+</body>
+</html>
