@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lab004->class</title>
+</head>
+<body>
+
+<div id="app-1">
+    <p>app1</p>
+    <div class="static" v-bind:class="{active:isActive, 'text-danger':hasError}"></div>
+</div>
+
+<hr>
+<div id="app-2">
+    <p>app2</p>
+    <div v-bind:class="classObject"></div>
+</div>
+
+<hr>
+<div id="app-3">
+    <p>app3</p>
+    <div v-bind:class="classObject"></div>
+</div>
+
+<hr>
+<div id="app-4">
+    <p>app4</p>
+    <div v-bind:class="[activeClass, errorClass]"></div>
+</div>
+
+<script src="../assets/js/vue@2.4.2.js"></script>
+<script>
+    //v-bind:class，如isActive为true的时候，class属性就会有active
+    var app1 = new Vue({
+        el: "#app-1",
+        data: {
+            isActive: true,
+            hasError: false
+        }
+    });
+
+    //v-bind:class直接绑定一个对象
+    var app2 = new Vue({
+        el: "#app-2",
+        data: {
+            classObject: {
+                active: true,
+                'text-danger': false
+            }
+        }
+    });
+
+    //v-bind:class，用计算属性
+    var app3 = new Vue({
+        el: "#app-3",
+        data: {
+            active: true,
+            error: null
+        },
+        computed: {
+            classObject: function () {
+                return {
+                    active: this.active,
+                    'text-danger': this.error && this.error.type === 'fatal',
+                }
+            }
+        }
+    });
+
+    //v-bind:class，数组语法
+    var app4 = new Vue({
+        el: "#app-4",
+        data: {
+            activeClass: "active",
+            errorClass: "text-danger"
+        }
+    });
+
+</script>
+</body>
+</html>
