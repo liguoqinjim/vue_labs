@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lab003</title>
+</head>
+<body>
+<div id="app-1">
+    {{ message.split('').reverse().join('') }}
+</div>
+
+<hr>
+<div id="app-2">
+    <p>Original message:"{{message}}"</p>
+    <p>Computed reversed message:"{{reversedMessage}}"</p>
+</div>
+
+<hr>
+<div id="app-3">
+    <p>Reversed message:"{{reversedMessage()}}"</p>
+</div>
+
+<hr>
+<div id="app-4">
+    <p>app-4</p>
+    <p>First Name:{{firstName}}</p>
+    <p>Last Name:{{lastName}}</p>
+    <p>Full Name:{{fullName}}</p>
+</div>
+
+<hr>
+<div id="app-5">
+    <p>app-5</p>
+    <p>First Name:{{firstName}}</p>
+    <p>Last Name:{{lastName}}</p>
+    <p>Full Name:{{fullName}}</p>
+</div>
+
+<hr>
+<div id="app-6">
+    <p>app-6</p>
+    <p>First Name:{{firstName}}</p>
+    <p>Last Name:{{lastName}}</p>
+    <p>Full Name:{{fullName}}</p>
+</div>
+
+<script src="../assets/js/vue@2.4.2.js"></script>
+<script>
+    var app1 = new Vue({
+        el: "#app-1",
+        data: {
+            message: "message1"
+        }
+    });
+
+    //计算属性
+    var app2 = new Vue({
+        el: "#app-2",
+        data: {
+            message: "message2"
+        },
+        computed: {
+            reversedMessage: function () {
+                return this.message.split('').reverse().join('')
+            }
+        }
+    });
+
+    //method，注意这个调用的时候是要加括号的
+    var app3 = new Vue({
+        el: "#app-3",
+        data: {
+            message: "message3"
+        },
+        methods: {
+            reversedMessage: function () {
+                return this.message.split('').reverse().join('')
+            }
+        }
+    })
+
+    //watch
+    var app4 = new Vue({
+        el: "#app-4",
+        data: {
+            firstName: "Ming",
+            lastName: "Xiao",
+            fullName: "Xiao Ming",
+        },
+        watch: {
+            firstName: function (val) {
+                this.fullName = this.lastName + " " + val;
+            },
+            lastName: function (val) {
+                this.fullName = val + " " + this.firstNamel;
+            }
+        }
+    });
+
+    //把app4里面的watch用computed来写
+    var app5 = new Vue({
+        el: "#app-5",
+        data: {
+            firstName: "Ming",
+            lastName: "Xiao"
+        },
+        computed: {
+            fullName: function () {
+                return this.lastName + " " + this.firstName;
+            }
+        }
+    });
+
+    //computed的setter，注：默认是只有getter
+    var app6 = new Vue({
+        el: "#app-6",
+        data: {
+            firstName: "Ming",
+            lastName: "Xiao"
+        },
+        computed: {
+            fullName: {
+                get: function () {
+                    return this.lastName + " " + this.firstName;
+                },
+                set: function (newValue) {
+                    var names = newValue.split(" ");
+                    this.lastName = names[0];
+                    this.firstName = names[names.length - 1];
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
