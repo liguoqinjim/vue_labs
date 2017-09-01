@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lab008->index1</title>
+</head>
+<body>
+<div id="app-1">
+    <p>app1</p>
+    <input v-model="message" placeholder="edit me">
+    <p>Message is:{{message}}</p>
+</div>
+
+<hr>
+<div id="app-2">
+    <p>app2</p>
+    <span>Multiline message is:</span>
+    <p style="white-space: pre-line">{{ message }}</p>
+    <br>
+    <textarea v-model="message" placeholder="add multiple lines"></textarea>
+</div>
+
+<hr>
+<div id="app-3">
+    <p>app3</p>
+    <input type="checkbox" id="checkbox" v-model="checked">
+    <label for="checkbox">{{ checked }}</label>
+</div>
+
+<hr>
+<div id="app-4">
+    <p>app4</p>
+    <input type="checkbox" id="jack" value="Jack1" v-model="checkedNames">
+    <label for="jack">Jack</label>
+    <input type="checkbox" id="john" value="John2" v-model="checkedNames">
+    <label for="john">John</label>
+    <input type="checkbox" id="mike" value="Mike3" v-model="checkedNames">
+    <label for="mike">Mike</label>
+    <br>
+    <span>Checked names: {{ checkedNames }}</span>
+</div>
+
+<hr>
+<div id="app-5">
+    <p>app5</p>
+    <input type="radio" id="one" value="One" v-model="picked">
+    <label for="one">One</label>
+    <br>
+    <input type="radio" id="two" value="Two" v-model="picked">
+    <label for="two">Two</label>
+    <br>
+    <span>Picked: {{ picked }}</span>
+</div>
+
+<hr>
+<div id="app-6">
+    <select v-model="selected">
+        <option disabled value="">请选择</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+    </select>
+    <span>Selected: {{ selected }}</span>
+</div>
+
+<script src="../assets/js/vue@2.4.2.js"></script>
+<script>
+    //文本
+    var app1 = new Vue({
+        el: "#app-1",
+        data: {
+            message: ""
+        }
+    });
+
+    //多行文本
+    var app2 = new Vue({
+        el: "#app-2",
+        data: {
+            message: ""
+        }
+    });
+
+    //复选框，单个值
+    var app3 = new Vue({
+        el: "#app-3",
+        data: {
+            checked: false
+        }
+    });
+
+    //复选框，多个值
+    var app4 = new Vue({
+        el: "#app-4",
+        data: {
+            checkedNames: []
+        }
+    });
+
+    //单选框
+    new Vue({
+        el: '#app-5',
+        data: {
+            picked: ''
+        }
+    })
+</script>
+
+</body>
+</html>
