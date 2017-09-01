@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lab005</title>
+</head>
+<body>
+<div id="app-1">
+    <p>app1</p>
+    <p v-if="ok">Yes</p>
+    <p v-else>No</p>
+</div>
+
+<hr>
+<div id="app-2">
+    <p>app2</p>
+    <template v-if="ok">
+        <p1>message1</p1>
+        <p2>message2</p2>
+        <p3>message3</p3>
+    </template>
+</div>
+
+<script src="../assets/js/vue@2.4.2.js"></script>
+<script>
+    var app1 = new Vue({
+        el: "#app-1",
+        data: {
+            ok: true
+        }
+    });
+
+    var app2 = new Vue({
+        el: "#app-2",
+        data: {
+            ok: true
+        }
+    });
+
+</script>
+
+</body>
+</html>
