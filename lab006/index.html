@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lab006</title>
+</head>
+<body>
+<div id="app-1">
+    <p>app1</p>
+    <ul>
+        <li v-for="item in items">
+            {{item.message}}
+        </li>
+    </ul>
+</div>
+
+<hr>
+<div id="app-2">
+    <p>app2</p>
+    <ul>
+        <li v-for="(item,index) in items">
+            {{parentMessage}} - {{index}} - {{item.message}}
+        </li>
+    </ul>
+</div>
+
+<hr>
+<div id="app-3">
+    <p>app3</p>
+    <ul>
+        <li v-for="value in forObject">
+            {{value}}
+        </li>
+    </ul>
+</div>
+
+<hr>
+<div id="app-4">
+    <p>app4</p>
+    <ul>
+        <li v-for="(value,key) in forObject">
+            {{key}} : {{value}}
+        </li>
+    </ul>
+</div>
+
+<hr>
+<div id="app-5">
+    <p>app5</p>
+    <ul>
+        <li v-for="n in evenNumbers">
+            {{n}}
+        </li>
+    </ul>
+</div>
+
+<hr>
+<div id="app-6">
+    <p>app6</p>
+    <ul>
+        <li v-for="n in even(numbers)">
+            {{n}}
+        </li>
+    </ul>
+</div>
+
+<hr>
+<div id="app-7">
+    <p>app7</p>
+    <ul>
+        <li v-for="n in 10">
+            {{n}}
+        </li>
+    </ul>
+</div>
+
+<script src="../assets/js/vue@2.4.2.js"></script>
+<script>
+    //v-for
+    var app1 = new Vue({
+        el: "#app-1",
+        data: {
+            items: [
+                {message: "Foo"},
+                {message: "Bar"}
+            ]
+        }
+    });
+
+    //v-for 父对象，index
+    var app2 = new Vue({
+        el: "#app-2",
+        data: {
+            parentMessage: "Parent",
+            items: [
+                {message: "Foo"},
+                {message: "Bar"}
+            ]
+        }
+    });
+
+    //v-for 迭代对象的属性
+    var app3 = new Vue({
+        el: "#app-3",
+        data: {
+            forObject: {
+                firstName: "Ming",
+                lastName: "Xiao",
+                age: 30
+            }
+        }
+    });
+
+    //v-for 迭代对象的属性，得到键名
+    var app4 = new Vue({
+        el: "#app-4",
+        data: {
+            forObject: {
+                firstName: "Ming",
+                lastName: "Xiao",
+                age: 30
+            }
+        }
+    });
+
+    //显示过滤，使用计算属性
+    var app5 = new Vue({
+        el: "#app-5",
+        data: {
+            numbers: [1, 2, 3, 4, 5]
+        },
+        computed: {
+            evenNumbers: function () {
+                return this.numbers.filter(function (number) {
+                    return number % 2 === 0
+                })
+            }
+        }
+    });
+
+    //显示过滤，使用method
+    var app6 = new Vue({
+        el: "#app-6",
+        data: {
+            numbers: [1, 2, 3, 4, 5]
+        },
+        methods: {
+            even: function (numbers) {
+                return numbers.filter(function (number) {
+                    return number % 2 === 0
+                })
+            }
+        }
+    })
+
+    //一段取值范围的v-for，这里不用data，直接 v-for="n in 10"
+    var app7 = new Vue({
+        el: "#app-7"
+    })
+</script>
+</body>
+</html>
