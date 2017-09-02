@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lab009->index1</title>
+</head>
+<body>
+<div id="app-1">
+    <p>app1</p>
+    <my-component></my-component>
+</div>
+
+<hr>
+<div id="app-2">
+    <p>app2</p>
+    <my-component2></my-component2>
+</div>
+
+<hr>
+<div id="app-3">
+    <p>app3</p>
+    <simple-counter></simple-counter>
+    <simple-counter></simple-counter>
+    <simple-counter></simple-counter>
+</div>
+
+<script src="../assets/js/vue@2.4.2.js"></script>
+<script>
+    //全局注册组件
+    Vue.component('my-component', {
+        template: '<div>A custom component1</div>'
+    });
+
+    var app1 = new Vue({
+        el: "#app-1"
+    });
+
+    //局部注册组件
+    var Child = {
+        template: '<div>A custom component2</div>'
+    };
+
+    var app2 = new Vue({
+        el: "#app-2",
+        components: {
+            "my-component2": Child
+        }
+    });
+
+    //data必须是函数
+    Vue.component('simple-counter', {
+        template: '<button v-on:click="counter += 1">{{counter}}</button>',
+        data: function () {
+            return {
+                counter: 0
+            }
+        }
+    });
+
+    var app3 = new Vue({
+        el: "#app-3"
+    });
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lab009->index2</title>
+</head>
+<body>
+<div id="app-1">
+    <p>app1</p>
+    <!--message会传递给子组件-->
+    <child1 message="hello!"></child1>
+</div>
+
+<hr>
+<div id="app-2">
+    <p>app2</p>
+    <child2 my-message="hello2!"></child2>
+</div>
+
+<hr>
+<div id="app-3">
+    <p>app3</p>
+    <input v-model="parentMessage">
+    <br>
+    <child3 v-bind:my-message="parentMessage"></child3>
+</div>
+
+<script src="../assets/js/vue@2.4.2.js"></script>
+<script>
+    //注册一个子组件，props里面加上要想要从父组件收到值
+    Vue.component('child1', {
+        props: ['message'],
+        template: '<span>{{message}}</span>'
+    });
+    var app1 = new Vue({
+        el: "#app-1"
+    });
+
+    //prop的命名，注意props里面写的是myMessage，但是在html里面要转换成my-message
+    Vue.component('child2', {
+        props: ['myMessage'],
+        template: '<span>{{myMessage}}</span>'
+    });
+    var app2 = new Vue({
+        el: "#app-2"
+    });
+
+    //动态prop
+    Vue.component('child3', {
+        props: ['myMessage'],
+        template: '<span>{{myMessage}}</span>'
+    });
+    var app3 = new Vue({
+        el: "#app-3",
+        data: {
+            parentMessage: "this is parent!"
+        }
+    });
+
+
+</script>
+</body>
+</html>
